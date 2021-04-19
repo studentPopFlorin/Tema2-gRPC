@@ -1,3 +1,8 @@
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import proto.ZodiacGrpc;
+import proto.ZodiacOuterClass;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -27,5 +32,10 @@ public class Main {
         String birthDate;
         Scanner in=new Scanner(System.in);
         birthDate=in.next();
+        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8999).usePlaintext().build();
+        ZodiacGrpc.ZodiacBlockingStub bookStub = ZodiacGrpc.newBlockingStub(channel);
+        ZodiacOuterClass.ZodiacAnswer reply = bookStub.returnZodiac(ZodiacOuterClass.BirthDateRequest.newBuilder().setDate(birthDate).setValidBirthDate(isBirthDateValid(birthDate)).build());
+        System.out.println(reply.getZodiac());
+        channel.shutdown();
     }
 }
