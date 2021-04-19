@@ -1,0 +1,15 @@
+syntax = "proto3";
+option java_package = "proto";
+
+service Zodiac {
+  rpc ReturnZodiac (BirthDateRequest) returns (ZodiacAnswer) {}
+}
+
+message BirthDateRequest {
+  string date = 1;
+  bool validBirthDate=2;
+}
+
+message ZodiacAnswer {
+  string zodiac = 1;
+}
