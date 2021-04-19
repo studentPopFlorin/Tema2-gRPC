@@ -4,7 +4,7 @@ public class ZodiacDetails {
     private String name;
     private String startDate;
     private String endDate;
-    
+
     public ZodiacDetails(String name, String startDate, String endDate){
         this.name=name;
         this.startDate=startDate;
